@@ -1,4 +1,5 @@
 import subprocess
+import sys
 
 MEM_THRESOLD = 10
 
@@ -43,13 +44,17 @@ def deploy_worker_node (avail):
 		for line in lines:
 			print (line.decode('utf-8'))
 
+def check_memory_utilization (memory, workers):
+	if memory > MEM_THRESOLD :
+		print ("Need to deploy a new node")
+		avail = find_available_node(workers)
+		print ("Available " + avail)
+		deploy_worker_node (avail)
+
 workers = find_worker_nodes();
 print (workers)
 memory = top_nodes (workers);
 print ("Memory: " + str(memory));
 
-if memory > MEM_THRESOLD :
-	print ("Need to deploy a new node")
-	avail = find_available_node(workers)
-	print ("Available " + avail)
-	deploy_worker_node (avail)
+if len(sys.argv) < 2 or sys.argv[1] != 'check':
+	check_memory_utilization (memory, workers);
