@@ -25,13 +25,22 @@ def find_worker_nodes ():
 def top_nodes (workers):
 	with subprocess.Popen(["kubectl","top","nodes"], stdout=subprocess.PIPE) as proc:
 		lines =  proc.stdout.read().splitlines()
+		sum = 0
+		count = 0
 		for line in lines:
 			columns = line.split()
 			node = columns[0].decode('utf-8')
 
 			if node in workers:
-				print (line.decode('utf-8'))
-				return int(columns[4].decode('utf-8').strip("%"))
+				perc = columns[4].decode('utf-8')
+				print (node + ": " + perc);
+				mem = int(perc.strip("%"))
+				sum += mem
+				count += 1
+
+		return sum / count 
+
+
 
 def find_available_node (workers):
 	for node in available_nodes:
