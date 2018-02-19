@@ -10,7 +10,7 @@ spec:
       containers:
       - name: deploy-worker-node
         image: patrocinio/icp-scaling-icp_inception:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         command: ["/installer/installer.sh", "install",  "-l", "10.0.0.4"]
         env:
           - name: LICENSE
