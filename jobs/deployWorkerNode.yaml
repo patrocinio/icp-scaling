@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: deploy-worker-node
+spec:
+  template:
+    metadata:
+      name: deploy-worker-node
+    spec:
+      containers:
+      - name: deploy-worker-node
+        image: ibmcom/icp-inception:2.1.0.1
+        imagePullPolicy: IfNotPresent
+        command: ["install",  "-l", "10.0.0.4"]
+      restartPolicy: Never

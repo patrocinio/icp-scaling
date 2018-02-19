@@ -1,5 +1,9 @@
 import subprocess
 
+MEM_THRESOLD = 10
+
+available_nodes = ["10.0.0.2", "10.0.0.4", "10.0.0.5", "10.0.0.6"]
+
 def find_worker_nodes ():
 	print ("Finding worker nodes...")
 	cmd='kubectl get no -o json | \
@@ -23,10 +27,21 @@ def top_nodes (workers):
 
 			if node in workers:
 				print (line.decode('utf-8'))
-				return columns[4]
+				return int(columns[4].decode('utf-8').strip("%"))
+
+def find_available_node (workers):
+	for node in available_nodes:
+		if node not in workers:
+			return node
+	return None
 
 
 workers = find_worker_nodes();
 print (workers)
 memory = top_nodes (workers);
-print (memory.decode('utf-8'));
+print ("Memory: " + str(memory));
+
+if memory > MEM_THRESOLD :
+	print ("Need to deploy a new node")
+	avail = find_available_node(workers)
+	print ("Available " + avail)
