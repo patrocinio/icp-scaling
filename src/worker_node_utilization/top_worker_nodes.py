@@ -36,8 +36,12 @@ def find_available_node (workers):
 	return None
 
 def deploy_worker_node (avail):
-	print ("TBD")	
-
+	print ("Deploying a worker node...")
+	with subprocess.Popen(["./deployWorkerNode.sh"], stdout=subprocess.PIPE, 
+		shell=True) as proc:
+		lines = proc.stdout.read().splitlines()
+		for line in lines:
+			print (line.decode('utf-8'))
 
 workers = find_worker_nodes();
 print (workers)
@@ -48,3 +52,4 @@ if memory > MEM_THRESOLD :
 	print ("Need to deploy a new node")
 	avail = find_available_node(workers)
 	print ("Available " + avail)
+	deploy_worker_node (avail)

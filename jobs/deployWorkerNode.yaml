@@ -9,7 +9,10 @@ spec:
     spec:
       containers:
       - name: deploy-worker-node
-        image: ibmcom/icp-inception:2.1.0.1
+        image: patrocinio/icp-scaling-icp_inception:latest
         imagePullPolicy: IfNotPresent
-        command: ["install",  "-l", "10.0.0.4"]
+        command: ["/installer/installer.sh", "install",  "-l", "10.0.0.4"]
+        env:
+          - name: LICENSE
+            value: accept
       restartPolicy: Never
