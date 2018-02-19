@@ -35,6 +35,9 @@ def find_available_node (workers):
 			return node
 	return None
 
+def deploy_worker_node (avail):
+	print ("TBD")	
+
 
 workers = find_worker_nodes();
 print (workers)
