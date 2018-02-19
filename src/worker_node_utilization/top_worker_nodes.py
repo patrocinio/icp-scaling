@@ -9,14 +9,17 @@ def find_worker_nodes ():
 	print ("Finding worker nodes...")
 	cmd='kubectl get no -o json | \
 		jq \'.items[].metadata | select (.labels.role != "master") | select (.labels.proxy != "true") | .name\' | \
-		tr -d \'"\' | tr -d \'\n\''
+		tr -d \'"\''
 
 	ps = subprocess.Popen(cmd,shell=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
 	output = ps.communicate()[0]
 
 	workers = set()
 	worker = output.decode('utf-8')
-	workers.add (worker)
+	worker_list = worker.split()
+	for w in worker_list:
+		print ("worker: " + w)
+		workers.add (w)
 	return workers
 
 def top_nodes (workers):
