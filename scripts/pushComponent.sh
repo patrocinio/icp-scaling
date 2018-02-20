@@ -1,5 +1,5 @@
 COMPONENT=icp_inception
-VERSION=1.0
+VERSION=1.1
 
 IMAGE=patrocinio/icp-scaling-$COMPONENT:$VERSION
 

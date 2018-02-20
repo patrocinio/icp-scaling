@@ -3,5 +3,4 @@ WORKDIR /installer
 ARG version
 
 COPY cluster.zip /installer/cluster
-RUN cd /installer/cluster
-RUN unzip -o /installer/cluster/cluster.zip
+RUN cd /installer/cluster && unzip -o cluster.zip
