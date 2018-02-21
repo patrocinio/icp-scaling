@@ -20,7 +20,10 @@ RUN tar xzvf bx.tar.gz
 
 RUN Bluemix_CLI/install_bluemix_cli
 
-RUN bx pr login -a https://169.63.84.222:8443 --skip-ssl-validation -u admin -p admin
+COPY plugin/ /tmp
 
+RUN bx plugin install /tmp/icp-linux-amd64
 
-CMD ["python3", "top_worker_nodes.py"]
+COPY scripts/ /usr/src/app
+
+CMD ["bash", "./checkUtilization.sh"]
