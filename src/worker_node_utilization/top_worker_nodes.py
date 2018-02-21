@@ -1,7 +1,7 @@
 import subprocess
 import sys
 
-MEM_THRESOLD = 10
+MEM_THRESOLD = 75
 
 available_nodes = ["10.0.0.2", "10.0.0.4", "10.0.0.5", "10.0.0.6"]
 
@@ -62,6 +62,8 @@ def check_memory_utilization (memory, workers):
 		avail = find_available_node(workers)
 		print ("Available " + avail)
 		deploy_worker_node (avail)
+	else:
+		print ("No need to scale")
 
 workers = find_worker_nodes();
 print (workers)
