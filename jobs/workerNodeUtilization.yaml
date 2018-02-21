@@ -1,17 +1,19 @@
-apiVersion: batch/v2alpha1
+apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
   name: worker-node-utilization
 spec:
   schedule: "*/5 * * * *"
-  successfulJobsHistoryList: 10
+  successfulJobsHistoryLimit: 10
   failedJobsHistoryLimit: 10
   jobTemplate:
     metadata:
       name: worker-node-utilization
     spec:
-      containers:
-      - name: worker-node-utilization
-        image: patrocinio/icp-scaling-worker-node-utilization:latest
-        imagePullPolicy: Always
-      restartPolicy: Never
+      template:
+        spec:
+          containers:
+          - name: worker-node-utilization
+            image: patrocinio/icp-scaling-worker-node-utilization:latest
+            imagePullPolicy: Always
+          restartPolicy: Never
