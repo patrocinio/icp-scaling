@@ -1,0 +1,14 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: worker-node-utilization
+spec:
+  template:
+    metadata:
+      name: worker-node-utilization
+    spec:
+      containers:
+      - name: worker-node-utilization
+        image: patrocinio/icp-scaling-worker-node-utilization:latest
+        imagePullPolicy: Always
+      restartPolicy: Never

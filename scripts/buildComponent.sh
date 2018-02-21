@@ -1,4 +1,4 @@
-COMPONENT=icp_inception
+COMPONENT=$1
 VERSION=1.1
 
 echo Building component $COMPONENT at version $VERSION
