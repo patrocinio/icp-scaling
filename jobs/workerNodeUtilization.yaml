@@ -14,6 +14,6 @@ spec:
         spec:
           containers:
           - name: worker-node-utilization
-            image: patrocinio/icp-scaling-worker-node-utilization:latest
+            image: patrocinio/icp-scaling-worker_node_utilization:latest
             imagePullPolicy: Always
           restartPolicy: Never
