@@ -1,9 +1,10 @@
 import subprocess
 import sys
-
-MEM_THRESOLD = 75
+import os
 
 available_nodes = ["10.0.0.2", "10.0.0.4", "10.0.0.5", "10.0.0.6"]
+
+DEFAULT_THRESHOLD = 75
 
 def find_worker_nodes ():
 	print ("Finding worker nodes...")
@@ -56,8 +57,9 @@ def deploy_worker_node (avail):
 		for line in lines:
 			print (line.decode('utf-8'))
 
-def check_memory_utilization (memory, workers):
-	if memory > MEM_THRESOLD :
+def check_memory_utilization (memory, workers, threshold):
+	print ("memory: " + str(memory) + " threshold: " + str(threshold))
+	if memory > threshold :
 		print ("Need to deploy a new node")
 		avail = find_available_node(workers)
 		print ("Available " + avail)
@@ -65,10 +67,20 @@ def check_memory_utilization (memory, workers):
 	else:
 		print ("No need to scale")
 
-workers = find_worker_nodes();
-print (workers)
-memory = top_nodes (workers);
-print ("Memory: " + str(memory));
+def define_threshold():
+	threshold = os.getenv ('MEM_THRESHOLD')
+	if threshold == "" :
+		threshold = DEFAULT_THRESHOLD
+	else:
+		threshold = int(threshold)
 
-if len(sys.argv) < 2 or sys.argv[1] != 'check':
-	check_memory_utilization (memory, workers);
+	print ("Memory threshold: " + str(threshold))
+	return threshold
+
+threshold = define_threshold()
+workers = find_worker_nodes()
+print (workers)
+memory = top_nodes (workers)
+print ("Memory: " + str(memory))
+
+check_memory_utilization (memory, workers, threshold)
