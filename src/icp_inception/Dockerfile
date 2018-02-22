@@ -4,3 +4,5 @@ ARG version
 
 COPY cluster.zip /installer/cluster
 RUN cd /installer/cluster && unzip -o cluster.zip
+
+COPY scripts/install.sh /installer

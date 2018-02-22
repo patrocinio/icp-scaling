@@ -11,8 +11,10 @@ spec:
       - name: deploy-worker-node
         image: patrocinio/icp-scaling-icp_inception:latest
         imagePullPolicy: Always
-        command: ["/installer/installer.sh", "install",  "-l", "10.0.0.4"]
+        command: ["/installer/install.sh"]
         env:
           - name: LICENSE
             value: accept
+          - name: WORKER
+            value: ${WORKER}
       restartPolicy: Never
