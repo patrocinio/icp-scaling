@@ -5,6 +5,9 @@ echo Deploying a worker node
 echo Node: $1
 export WORKER=$1
 
-kubectl create configmap worker-node --from-literal=worker=$WORKER
+CONFIG_MAP=worker-node
+
+kubectl delete configmap $CONFIG_MAP
+kubectl create configmap $CONFIG_MAP --from-literal=worker=$WORKER
 
 kubectl create -f ../jobs/deployWorkerNode.yaml
