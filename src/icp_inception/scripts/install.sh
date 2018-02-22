@@ -2,4 +2,4 @@
 
 echo Worker: $WORKER
 
-#/installer/installer.sh install -l $WORKER
+/installer/installer.sh install -l $WORKER

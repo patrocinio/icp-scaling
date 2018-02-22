@@ -9,12 +9,15 @@ spec:
     spec:
       containers:
       - name: deploy-worker-node
-        image: patrocinio/icp-scaling-icp_inception:1.3
+        image: patrocinio/icp-scaling-icp_inception:latest
         imagePullPolicy: Always
         command: ["/installer/install.sh"]
         env:
           - name: LICENSE
             value: accept
           - name: WORKER
-            value: $WORKER
+            valueFrom:
+              configMapKeyRef:
+                name: worker-node
+                key: worker      
       restartPolicy: Never

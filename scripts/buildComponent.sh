@@ -1,5 +1,5 @@
 COMPONENT=$1
-VERSION=1.2
+VERSION=1.3
 
 echo Building component $COMPONENT at version $VERSION
 
