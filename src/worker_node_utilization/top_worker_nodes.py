@@ -50,7 +50,7 @@ def find_available_node (workers):
 	return None
 
 def deploy_worker_node (avail):
-	print ("Deploying a worker node...")
+	print ("Deploying worker node " + avail)
 	with subprocess.Popen(["./deployWorkerNode.sh", avail], stdout=subprocess.PIPE, 
 		shell=True) as proc:
 		lines = proc.stdout.read().splitlines()
