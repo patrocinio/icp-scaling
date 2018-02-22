@@ -51,8 +51,7 @@ def find_available_node (workers):
 
 def deploy_worker_node (avail):
 	print ("Deploying worker node " + avail)
-	with subprocess.Popen(["./deployWorkerNode.sh", avail], stdout=subprocess.PIPE, 
-		shell=True) as proc:
+	with subprocess.Popen(["./deployWorkerNode.sh", avail], stdout=subprocess.PIPE) as proc:
 		lines = proc.stdout.read().splitlines()
 		for line in lines:
 			print (line.decode('utf-8'))
