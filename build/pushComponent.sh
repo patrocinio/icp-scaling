@@ -1,5 +1,5 @@
 COMPONENT=$1
-VERSION=1.3
+VERSION=1.4
 
 IMAGE=patrocinio/icp-scaling-$COMPONENT:$VERSION
 
