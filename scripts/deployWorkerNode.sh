@@ -1,5 +1,4 @@
 #!/bin/bash
-set -x
 echo Deleting deployWorkerNode job
 kubectl delete job deploy-worker-node
 
